@@ -48,6 +48,13 @@ export default {
   name: 'Home',
   data () {
     return {
+
+      // 取得した緯度
+      latitude: 0,
+
+      // 取得した経度
+      longitude: 0,
+
       // 取得したマーカーの一覧
       markers: [
         {
@@ -71,13 +78,38 @@ export default {
       }
     }
   },
+
   methods: {
+
+    // ウィンドウ表示処理
     open (marker) {
       marker.opend = true
     },
+
+    // ウィンドウ非表示処理
     close (marker) {
       marker.opend = false
+    },
+
+    // 位置情報取得処理
+    geolocation () {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            const coords = position.coords
+            // 緯度経度だけ取得
+            this.latitude = coords.latitude
+            this.longitude = coords.longitude
+          }.bind(this)
+        )
+      } else {
+        alert('位置情報を取得できませんでした')
+      }
     }
+  },
+
+  mounted () {
+    this.geolocation()
   }
 }
 </script>
