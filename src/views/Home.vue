@@ -122,8 +122,9 @@ export default {
 }
 
 .google-map {
-  width: 100%;
-  height: 100%;
+  margin: 1% 1%;
+  width: 98%;
+  height: 98%;
 }
 
 </style>
