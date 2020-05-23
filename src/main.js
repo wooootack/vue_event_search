@@ -15,7 +15,7 @@ Vue.use(BootstrapVue)
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyC1ZRrN9Wb4PU-0B-0DQhwD1IgVAFWk8uU',
+    key: process.env.VUE_APP_GOOGLE_MAP_API_KEY,
     libraries: 'places',
     region: 'JP',
     language: 'ja'
