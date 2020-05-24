@@ -1,3 +1,6 @@
+// Axios
+import axios from 'axios'
+
 export default {
 
   // 現在地情報を取得し、mutationに渡す
@@ -17,8 +20,14 @@ export default {
 
   // 勉強会情報を検索し、mutationに渡す
   searchStudySessions (context, param) {
-    // APIを使って検索する
-
+    axios.get('/users')
+      .then(function (response) {
+        console.log(response.data)
+      })
+      .catch(function (error) {
+        console.log('ERROR!! occurred in Backend.', error)
+      })
+    console.log('end')
     // stateの更新
     context.commit('setStudySessions', [])
   }

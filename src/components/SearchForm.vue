@@ -4,7 +4,7 @@
       {{ message }}
     </button>
     <div class="form-container" v-show="searching">
-      <b-form @submit="onSubmit" class="search-form">
+      <b-form @submit.prevent="onSubmit" class="search-form">
         <b-form-group
           id="input-group-keywords"
           label="キーワード"
