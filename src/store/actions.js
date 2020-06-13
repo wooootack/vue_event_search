@@ -1,5 +1,6 @@
 // Axios
 import axios from 'axios'
+import state from './state'
 
 export default {
 
@@ -20,14 +21,23 @@ export default {
 
   // 勉強会情報を検索し、mutationに渡す
   searchStudySessions (context, param) {
-    axios.get('/users')
+    const params = {
+      lat: state.latitude,
+      lon: state.latitude,
+      start: param.start.replace(/-/g, ''),
+      end: param.end.replace(/-/g, ''),
+      count: param.count
+    }
+
+    console.log(params)
+
+    axios.get('/events?', { params })
       .then(function (response) {
         console.log(response.data)
       })
       .catch(function (error) {
-        console.log('ERROR!! occurred in Backend.', error)
+        console.log('ERROR!! occurred in Backend.', error.response)
       })
-    console.log('end')
     // stateの更新
     context.commit('setStudySessions', [])
   }

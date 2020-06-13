@@ -59,7 +59,7 @@
           label-for="max-sb">
           <b-form-spinbutton
             id="max-sb"
-            v-model="form.max"
+            v-model="form.count"
             min="1"
             max="50" />
         </b-form-group>
@@ -78,7 +78,7 @@ export default {
         tags: [],
         start: '',
         end: '',
-        max: 10
+        count: 10
       },
       message: '検索条件を開く',
       searching: false
