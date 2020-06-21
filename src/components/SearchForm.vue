@@ -1,70 +1,34 @@
 <template>
-  <div>
-    <button @click="formToggle" class="button">
+  <div class="search-form-container">
+
+    <button @click="formToggle" class="header">
       {{ message }}
     </button>
+
     <div class="form-container" v-show="searching">
-      <b-form @submit.prevent="onSubmit" class="search-form">
-        <b-form-group
-          id="input-group-keywords"
-          label="キーワード"
-          label-for="input-keywords">
-          <b-form-tags
-            id="input-keywords"
-            input-id="tags-remove-on-delete"
-            :input-attrs="{ 'aria-describedby': 'tags-remove-on-delete-help' }"
-            v-model="form.keywords"
-            separator=" "
-            placeholder="スペース区切りで複数入力できます。"
-            remove-on-delete
-            no-add-on-enter />
-        </b-form-group>
-        <b-form-group
-          id="input-group-tags"
-          label="ジャンル"
-          label-for="input-tags">
-          <b-form-tags
-            id="input-tags"
-            input-id="tags-remove-on-delete"
-            :input-attrs="{ 'aria-describedby': 'tags-remove-on-delete-help' }"
-            v-model="form.tags"
-            separator=" "
-            placeholder="スペース区切りで複数入力できます。"
-            remove-on-delete
-            no-add-on-enter />
-        </b-form-group>
-        <b-form-group
-          id="input-group-start"
-          label="開催日"
-          label-for="start-datepicker">
-          <b-form-datepicker
-            id="start-datepicker"
-            v-model="form.start"
-            :date-format-options="{ year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short' }"
-            placeholder="開始日" />
-        </b-form-group>
-        <b-form-group
-          id="input-group-end"
-          label="終了日"
-          label-for="end-datepicker">
-          <b-form-datepicker
-            id="end-datepicker"
-            v-model="form.end"
-            :date-format-options="{ year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short' }"
-            placeholder="終了日" />
-        </b-form-group>
-        <b-form-group
-          id="input-group-max"
-          label="最大件数"
-          label-for="max-sb">
-          <b-form-spinbutton
-            id="max-sb"
-            v-model="form.count"
-            min="1"
-            max="50" />
-        </b-form-group>
-        <div class="button-wrapper"><b-button type="submit" variant="info">現在地から検索</b-button></div>
-      </b-form>
+
+      <form @submit.prevent="onSubmit">
+
+        <div class="form-group">
+          <label>キーワード</label>
+          <input type="text" v-model="form.keyword">
+        </div>
+
+        <div class="form-group">
+          <label>取得件数</label>
+          <input type="number" v-model="form.count">
+        </div>
+
+        <div class="form-group">
+          <label>検索期間</label>
+          <input type="date" v-model="form.start"><p>から</p><input type="date" v-model="form.end">
+        </div>
+
+        <div class="button-wrapper">
+          <button type="submit">検索</button>
+        </div>
+      </form>
+
     </div>
   </div>
 </template>
@@ -75,13 +39,12 @@ export default {
     return {
       form: {
         keywords: [],
-        tags: [],
-        start: '',
-        end: '',
+        start: '2020-07-01',
+        end: '2020-07-02',
         count: 10
       },
       message: '検索条件を開く',
-      searching: false
+      searching: true
     }
   },
   methods: {
@@ -102,27 +65,88 @@ export default {
 
 <style scoped>
 
-.search-form {
-  background-color:#F0F0F0;
-  margin: 0.5% 0.5% 0 0.5%;
-  padding: 0.5%;
-  border-radius: 10px;
+.search-form-container {
+  text-align: center;
 }
 
-.button {
-  margin: 0.5% 0.5% 0 0.5%;
-  width: 100%;
-  padding: 10px 100px;
-  color: white;
-  background-color: #17a2b8;
+.form-group {
+  display: flex;
+  align-items: center;
+  width: 500px;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
-.button:focus {
-  outline:0;
+p {
+  width: 40px;
+  text-align: center;
+  margin: 0;
+}
+
+label {
+  width: 100px;
+}
+
+input[type="text"] {
+  font: 15px/24px sans-serif;
+  box-sizing: border-box;
+  padding: 0.3em;
+  width: 380px;
+  transition: 0.3s;
+  letter-spacing: 1px;
+  color: #aaaaaa;
+  border: 1px solid #1b2538;
+  border-radius: 4px;
+}
+
+input[type="number"] {
+  font: 15px/24px sans-serif;
+  box-sizing: border-box;
+  padding: 0.3em;
+  width: 380px;
+  transition: 0.3s;
+  letter-spacing: 1px;
+  color: #aaaaaa;
+  border: 1px solid #1b2538;
+  border-radius: 4px;
+}
+
+input[type="date"] {
+  font: 15px/24px sans-serif;
+  box-sizing: border-box;
+  padding: 0.3em;
+  transition: 0.3s;
+  letter-spacing: 1px;
+  width: 170px;
+  color: #aaaaaa;
+  border: 1px solid #1b2538;
+  border-radius: 4px;
+}
+
+input:focus {
+  border: 1px solid #da3c41;
+  outline: none;
+  box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
 }
 
 .button-wrapper {
-  text-align:center;
+  text-align: center;
+}
+
+button {
+  padding: 10px 100px;
+  margin-bottom: 1%;
+  color: #333;
+  background: #eee;
+  border: 0;
+}
+
+button:focus {
+  outline:0;
+}
+
+.header {
+  width: 100%;
 }
 
 </style>

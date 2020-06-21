@@ -1,57 +1,118 @@
 <template>
+  <header>
+  <div class="header-inner">
 
-  <b-navbar toggleable="lg" type="dark" variant="info">
+    <div class="logo">
+      <img src="@/assets/logo.png" />
+    </div>
 
-    <b-navbar-brand>
-      <router-link class="title" to="/">TechLink</router-link>
-    </b-navbar-brand>
+    <nav class="header-nav">
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <ul class="header-nav-list">
 
-    <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav class="ml-auto">
+        <router-link to="/" @click="homeClicked">
+          <li class="header-nav-item" v-bind:class="{ select:isHome }">Home</li>
+        </router-link>
 
-        <b-nav-item right class="header-item">
-          <router-link to="/">Home</router-link>
-        </b-nav-item>
+        <router-link to="/about" @click="aboutClicked">
+          <li class="header-nav-item" v-bind:class="{ select:isAbout }">About</li>
+        </router-link>
 
-        <b-nav-item right class="header-item">
-          <router-link to="/about">About</router-link>
-        </b-nav-item>
+        <router-link to="#" @click="contactClicked">
+          <li class="header-nav-item" v-bind:class="{ select:isContact }">Contact</li>
+        </router-link>
 
-      </b-navbar-nav>
-    </b-collapse>
+      </ul>
 
-  </b-navbar>
-
+    </nav>
+  </div>
+</header>
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      isHome: true,
+      isAbout: false,
+      isContact: false
+    }
+  },
+  methods: {
+    homeClicked () {
+      this.isHome = true
+      this.isAbout = false
+      this.isContact = false
+    },
+    aboutClicked () {
+      this.isHome = false
+      this.isAbout = true
+      this.isContact = false
+    },
+    contactClicked () {
+      this.isHome = false
+      this.isAbout = false
+      this.isContact = true
+    }
+  }
+}
 </script>
 
 <style scoped>
 
-.header-item {
+header {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  max-width: 1024px;
+  height: 60px;
+  padding: 0 0.8em;
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+
+.header-nav-list {
+  display: inline-block;
+}
+
+.header-nav-item {
+  float: left;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ccc;
   text-align: center;
+  list-style: none;
 }
 
-.header-item a {
-  color: #FFF;
-}
-
-.header-item a.router-link-exact-active {
-  font-weight: bold;
-  color: #FFF;
-}
-
-.title {
-  font-weight: bold;
-  color: #FFF;
-}
-
-.title:hover {
+.header-nav-item a {
   text-decoration: none;
+}
+
+.select {
+  color: #444;
+}
+
+.header-nav-item:hover {
+  background: #eee;
+}
+
+.logo img {
+  width: 70px;
+}
+
+@media screen and (max-width: 480px) {
+  .header-nav-list {
+    display: none;
+  }
+
+  .header-nav {
+    margin: 0 0 0 auto;
+  }
 }
 
 </style>

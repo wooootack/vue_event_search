@@ -7,12 +7,20 @@ export default {
   // 現在地情報を取得し、mutationに渡す
   geolocation (context) {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
+      const geoOptions = {
+        maximumAge: 0,
+        timeout: 2000,
+        enableHighAccuracy: true
+      }
+
+      navigator.geolocation.watchPosition(
         function (position) {
-          const coords = position.coords
           // stateの更新
-          context.commit('setLocation', { latitude: coords.latitude, longitude: coords.longitude })
-        }
+          context.commit('setLocation', { latitude: 35.690921, longitude: 139.70025799999996 })
+          // TODO context.commit('setLocation', { latitude: position.coords.latitude, longitude: position.coords.longitude })
+        },
+        null,
+        geoOptions
       )
     } else {
       alert('位置情報を取得できませんでした')
@@ -29,16 +37,15 @@ export default {
       count: param.count
     }
 
-    console.log(params)
-
     axios.get('/events?', { params })
       .then(function (response) {
-        console.log(response.data)
+        response.data.map(function (value) {
+          value.opend = false
+        })
+        context.commit('setStudySessions', response.data)
       })
       .catch(function (error) {
         console.log('ERROR!! occurred in Backend.', error.response)
       })
-    // stateの更新
-    context.commit('setStudySessions', [])
   }
 }

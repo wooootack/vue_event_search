@@ -1,5 +1,5 @@
 <template>
-  <div class="map-container">
+  <div>
     <!--
       :center     => 表示位置の中心を設定
       :zoom       => 拡大率
@@ -26,7 +26,7 @@
         :position="m.position"
         :opened="m.opend"
         @closeclick="close(m)">
-        {{ m.info }}
+        {{ m.title }}
       </GmapInfoWindow>
 
       <!--
@@ -42,8 +42,11 @@
 </template>
 
 <script>
+
 export default {
   name: 'GoogleMap',
+  components: {
+  },
   data () {
     return {
       // ウィンドウ表示時のオプション
@@ -72,23 +75,16 @@ export default {
   },
   mounted () {
     // 位置情報の取得
-    // TODO 精度が悪いのでいったんスキップ
-    // this.$store.dispatch('geolocation')
+    this.$store.dispatch('geolocation')
   }
 }
 </script>
 
 <style scoped>
 
-.map-container {
-  width: 100vw;
-  height: 85vh;
-}
-
 .google-map {
-  margin: 0.5%;
-  width: 99%;
-  height: 99%;
+  width: 70vw;
+  height: 92vh;
 }
 
 </style>
