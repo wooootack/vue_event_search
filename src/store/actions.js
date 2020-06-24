@@ -34,7 +34,10 @@ export default {
       lon: state.latitude,
       start: param.start.replace(/-/g, ''),
       end: param.end.replace(/-/g, ''),
-      count: param.count
+      count: param.count,
+      keyword: param.keyword,
+      online: param.online,
+      offline: param.offline
     }
 
     axios.get('/events?', { params })

@@ -24,6 +24,18 @@
           <input type="date" v-model="form.start"><p>から</p><input type="date" v-model="form.end">
         </div>
 
+        <div class="form-group">
+          <label>開催方法</label>
+          <div class="check-group">
+            <div class="check">
+              <input type="checkbox" id="online" v-model="form.online"><label for="online">オンライン</label>
+            </div>
+            <div class="check">
+              <input type="checkbox" id="offline" v-model="form.offline"><label for="offline">オフライン</label>
+            </div>
+          </div>
+        </div>
+
         <div class="button-wrapper">
           <button type="submit">検索</button>
         </div>
@@ -38,10 +50,12 @@ export default {
   data () {
     return {
       form: {
-        keywords: [],
+        keyword: '',
         start: '2020-07-01',
         end: '2020-07-02',
-        count: 10
+        count: 10,
+        online: false,
+        offline: false
       },
       message: '検索条件を開く',
       searching: true
@@ -67,28 +81,38 @@ export default {
 
 .search-form-container {
   text-align: center;
+  width: 500px;
 }
 
 .form-group {
   display: flex;
   align-items: center;
-  width: 500px;
   margin-top: 1%;
   margin-bottom: 1%;
+}
+
+.check-group {
+  display: flex;
+}
+
+.check {
+  width: 100px;
 }
 
 p {
   width: 40px;
   text-align: center;
+  font-size: 0.8em;
   margin: 0;
 }
 
 label {
   width: 100px;
+  font-size: 0.8em;
 }
 
 input[type="text"] {
-  font: 15px/24px sans-serif;
+  font-size: 0.8em;
   box-sizing: border-box;
   padding: 0.3em;
   width: 380px;
@@ -100,7 +124,7 @@ input[type="text"] {
 }
 
 input[type="number"] {
-  font: 15px/24px sans-serif;
+  font-size: 0.9em;
   box-sizing: border-box;
   padding: 0.3em;
   width: 380px;
@@ -112,7 +136,7 @@ input[type="number"] {
 }
 
 input[type="date"] {
-  font: 15px/24px sans-serif;
+  font-size: 0.9em;
   box-sizing: border-box;
   padding: 0.3em;
   transition: 0.3s;
@@ -121,6 +145,12 @@ input[type="date"] {
   color: #aaaaaa;
   border: 1px solid #1b2538;
   border-radius: 4px;
+}
+
+input[type="checkbox"] {
+  transition: 0.3s;
+  color: #aaaaaa;
+  border: 1px solid #1b2538;
 }
 
 input:focus {
@@ -134,7 +164,7 @@ input:focus {
 }
 
 button {
-  padding: 10px 100px;
+  padding: 5px 60px;
   margin-bottom: 1%;
   color: #333;
   background: #eee;
@@ -146,6 +176,7 @@ button:focus {
 }
 
 .header {
+  padding: 10px 100px;
   width: 100%;
 }
 
