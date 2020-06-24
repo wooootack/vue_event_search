@@ -16,9 +16,5 @@ export default {
 
   // 取得した勉強会情報の一覧
   studySessions: [
-    {
-      title: 'Test',
-      description: 'test'
-    }
   ]
 }
