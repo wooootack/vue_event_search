@@ -31,7 +31,7 @@ export default {
   searchStudySessions (context, param) {
     const params = {
       lat: state.latitude,
-      lon: state.latitude,
+      lon: state.longitude,
       start: param.start.replace(/-/g, ''),
       end: param.end.replace(/-/g, ''),
       count: param.count,
