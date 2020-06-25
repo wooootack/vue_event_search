@@ -20,7 +20,7 @@
           <span class="head">参加人数</span><span class="content">{{ event.accepted }} / {{ event.limit }} 人</span>
         </p>
         <p class="event-description">
-          <span class="head">会場まで</span><span class="content">{{ event.distance }} m</span>
+          <span class="head">会場まで</span><span class="content">{{ event.distance }} km</span>
         </p>
       </div>
     </div>
